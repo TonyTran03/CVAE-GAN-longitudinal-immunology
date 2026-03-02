@@ -13,7 +13,6 @@ from src.transformation import make_transform
 def load_checkpoint(path: Path):
     ckpt = torch.load(path, map_location="cpu", weights_only=False)
 
-    # Rebuild from saved dictionary
     cfg = Config(**ckpt["cfg"])
 
     scaler_mean = np.asarray(ckpt["scaler_mean"], dtype=np.float32)
@@ -21,12 +20,7 @@ def load_checkpoint(path: Path):
 
     x_dim = scaler_mean.shape[0]
 
-    model = CVAE(
-        x_dim=x_dim,
-        c_dim=2,
-        z_dim=cfg.z_dim,
-        hidden=cfg.hidden,
-    )
+    model = CVAE(x_dim=x_dim, c_dim=2, z_dim=cfg.z_dim, hidden=cfg.hidden)
     model.load_state_dict(ckpt["model_state"])
     model.eval()
 
@@ -62,7 +56,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Device:", device)
 
-    ckpt_path = Path("data/output/log1p/cvae_best_xlog1p_z16_h128_b0p5_lr0p001_dn0_seed42.pt")
+    ckpt_path = Path("data/log1p/cvae_best_xlog1p_z16_h128_b0p5_lr0p001_dn0_seed42.pt")
     model, cfg, mean, scale, transform = load_checkpoint(ckpt_path)
 
     cfg.ensure_dirs()

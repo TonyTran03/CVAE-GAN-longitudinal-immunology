@@ -57,3 +57,14 @@ class CVAE(nn.Module):
         z = self.reparameterize(mu, logvar)
         x_hat = self.decode(z, c)
         return x_hat, mu, logvar
+    
+if __name__ == "__main__":
+    # Quick test
+    x_dim, c_dim, z_dim, hidden = 10, 2, 4, 16
+    model = CVAE(x_dim, c_dim, z_dim, hidden)
+    x = torch.randn(5, x_dim)
+    c = F.one_hot(torch.randint(0, c_dim, (5,)), num_classes=c_dim).float()
+    x_hat, mu, logvar = model(x, c)
+    print("x_hat shape:", x_hat.shape)
+    print("mu shape:", mu.shape)
+    print("logvar shape:", logvar.shape)

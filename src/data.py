@@ -47,7 +47,7 @@ def make_loaders(
     seed: int,
     num_classes: int = 2,
     x_transform: str = "none", 
-) -> Tuple[DataLoader, DataLoader, StandardScaler, XTransform]:
+) -> Tuple[DataLoader, DataLoader, StandardScaler]:
 
     # --- Split first ---
     X_train, X_val, y_train, y_val = train_test_split(
@@ -90,4 +90,4 @@ def make_loaders(
         drop_last=False,
     )
 
-    return train_loader, val_loader, scaler, transform
+    return train_loader, val_loader, scaler

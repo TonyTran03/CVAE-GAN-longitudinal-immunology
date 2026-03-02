@@ -4,13 +4,13 @@ from pathlib import Path
 @dataclass
 class Config:
     seed: int = 42
-
+    # DO NOT touch theese
     data_path: Path = Path("data/allSyntheticData.RData")
-    output_path: Path = Path("data/output")
+    output_path: Path = Path("data")
 
     test_size: float = 0.2
 
-    # CVAE
+    # CVAE hyperparameters
     z_dim: int = 16
     hidden: int = 128
     beta: float = 0.5
@@ -22,6 +22,8 @@ class Config:
     # Keys inside .RData
     x_key: str = "x"
     y_key: str = "y"
+
+    # Change distribution of X 
     x_transform: str = "log1p" # none | log1p
 
     def transform_name(self) -> str:
