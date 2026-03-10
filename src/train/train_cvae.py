@@ -6,9 +6,9 @@ from typing import Dict
 
 import torch
 
-from src.config import Config
+from util.config import Config
 from src.data import load_rdata_xy, make_loaders
-from src.utils import set_seed
+from util.utils import set_seed
 
 from models.cvae import CVAE
 cfg = Config()

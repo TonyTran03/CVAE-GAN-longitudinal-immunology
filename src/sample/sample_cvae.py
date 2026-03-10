@@ -7,8 +7,8 @@ import torch
 import torch.nn.functional as F
 
 from models.cvae import CVAE
-from src.config import Config
-from src.transformation import make_transform
+from util.config import Config
+from util.transformation import make_transform
 
 
 def load_checkpoint(path: Path):

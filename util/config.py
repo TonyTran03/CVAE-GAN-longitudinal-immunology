@@ -5,26 +5,28 @@ from pathlib import Path
 class Config:
     seed: int = 42
     # DO NOT touch theese
-    data_path: Path = Path("/allSyntheticData.RData")
+    data_path: Path = Path("data/allSyntheticData.RData")
     output_path: Path = Path("data")
-
     test_size: float = 0.2
 
-    # CVAE hyperparameters
+#______________________________________________________
+    # CVAE and GANs hyperparameters
     z_dim: int = 16
     hidden: int = 128
-    beta: float = 0.5
     epochs: int = 200
     batch_size: int = 64
     lr: float = 1e-3
+    x_transform: str = "log1p" # none | log1p  (distribution of X) 
+
+    # CVAE specific
+    beta: float = 0.5
     decoder_noise: float = 0
-    
+#______________________________________________________
     # Keys inside .RData
     x_key: str = "x"
     y_key: str = "y"
 
-    # Change distribution of X 
-    x_transform: str = "log1p" # none | log1p
+
 
     def transform_name(self) -> str:
         return (self.x_transform or "none").strip().lower()

@@ -34,7 +34,7 @@ class CVAE(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden, hidden),
             nn.ReLU(),
-            nn.Linear(hidden, x_dim),  # linear output for MSE/Gaussian recon
+            nn.Linear(hidden, x_dim), # linear output for MSE/Gaussian recon
         )
 
     def encode(self, x: torch.Tensor, c: torch.Tensor):
@@ -59,7 +59,6 @@ class CVAE(nn.Module):
         return x_hat, mu, logvar
     
 if __name__ == "__main__":
-    # Quick test
     x_dim, c_dim, z_dim, hidden = 10, 2, 4, 16
     model = CVAE(x_dim, c_dim, z_dim, hidden)
     x = torch.randn(5, x_dim)
